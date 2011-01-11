@@ -214,7 +214,7 @@ public class SunburnShip {
     }
 
     public boolean lostAgainst(SunburnShip enemy) {
-        return !enemy.isDestroyed() && enemy.drivesLeft() && isDestroyed();
+        return enemy.wonAgainst(this);
     }
 
     public boolean drewAgainst(SunburnShip enemy) {
