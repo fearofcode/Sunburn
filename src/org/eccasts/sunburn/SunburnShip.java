@@ -248,18 +248,12 @@ public class SunburnShip {
             
             if(wonAgainst(enemy)) {
                 logger.info("I win!");
-                logger.info("My final state: " + getCurrentState());
-                logger.info("His final state: " + enemy.getCurrentState());
                 return 1;
             } else if(lostAgainst(enemy)) {
                 logger.info("I lose!");
-                logger.info("My final state: " + getCurrentState());
-                logger.info("His final state: " + enemy.getCurrentState());
                 return -1;
             } else if(drewAgainst(enemy)) {
                 logger.info("Stalemate.");
-                logger.info("My final state: " + getCurrentState());
-                logger.info("His final state: " + enemy.getCurrentState());
                 return 0;
             }
             
