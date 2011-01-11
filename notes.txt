@@ -1,0 +1,36 @@
+each spaceship has a list of slots. each slot can be one of guns, lasers, missiles, drives, or shields.
+
+20 system slots by default
+
+gene: 20 slots, preferred range
+
+shield multiplication factor of 3.
+
+(GLMDSSMGLSDSMLGMLSDS, 16) transforms to:
+
+SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD_16.
+
+initial range of 20.
+
+preferred range is an integer, 1-30 inclusive.
+
+ships start at initial range, firing all their guns at each other and then moving.
+
+every time a hit is scored, one system is removed from the front of the ship, like:
+
+SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD
+SSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD
+...
+D
+
+a ship can move one unit towards its preferred range for each drive it has.
+
+to win, a ship must destroy all the systems on the other ship and have one drive left.
+
+if neither ship has any remaining drives or neither ship has any weapons left, it's a draw.
+
+if a draw or victory has not been reached after 100 turns, it's a draw.
+
+fitness is determined by winning (gladiatorial tournament selection).
+
+find two winners and two losers. the winners mate and overwrite the losers.
