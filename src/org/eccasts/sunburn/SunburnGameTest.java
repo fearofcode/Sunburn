@@ -3,6 +3,8 @@ package org.eccasts.sunburn;
 import static org.junit.Assert.*;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -230,6 +232,9 @@ public class SunburnGameTest {
     @Test public void RunCombat() {
         SunburnShip enemy = new SunburnShip(new Random());
         enemy.setGenome("SSSSSSSSSSSSSSSSSSSGD");
+        
+        Logger logger = Logger.getLogger(SunburnShip.class.getName());
+        logger.setLevel(Level.SEVERE);
         
         assertEquals(1, ship.fightAgainst(enemy));
         
