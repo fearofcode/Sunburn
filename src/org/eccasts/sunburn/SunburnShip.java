@@ -10,7 +10,7 @@ public class SunburnShip {
     public static final int INITIAL_PREFERRED_RANGE = 20;
     private Random rng;
     private int preferredRange;
-    private String genome;
+    private String slots;
     private static final char[] ALPHABET = new char[] { 'D', 'S', 'G', 'L', 'M' };
     private static final int GENOME_LENGTH = 20;
     private String currentState;
@@ -44,7 +44,7 @@ public class SunburnShip {
     }
 
     public void setGenome(String genome) {
-        this.genome = genome;
+        this.slots = genome;
         
         this.currentState = developGenome();
     }
@@ -54,16 +54,16 @@ public class SunburnShip {
         
         int shieldCount = 0;
         
-        for(int i = 0; i < genome.length(); i++) {
-            if(genome.charAt(i) == 'S')
+        for(int i = 0; i < slots.length(); i++) {
+            if(slots.charAt(i) == 'S')
                 shieldCount++;
         }
         
         for(int i = 1; i <= shieldCount*SHIELD_MULTIPLICATION_FACTOR; i++)
             developed.append('S');
         
-        for(int i = 0; i < genome.length(); i++) {
-            char ch = genome.charAt(i);
+        for(int i = 0; i < slots.length(); i++) {
+            char ch = slots.charAt(i);
             
             if(ch != 'S')
                 developed.append(ch);
