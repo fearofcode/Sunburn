@@ -234,7 +234,8 @@ public class SunburnGameTest {
         assertEquals(1, ship.fightAgainst(enemy));
         
         // against two nearly all-shield setups, draw
-        
+        ship = new SunburnShip(new Random());
+        enemy = new SunburnShip(new Random());
         enemy.setGenome("SSSSSSSSSSSSSSSSSSGD");
         ship.setGenome("SSSSSSSSSSSSSSSSSSGD");
         
