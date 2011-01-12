@@ -248,7 +248,7 @@ public class SunburnGameTest {
         assertEquals(0, ship.fightAgainst(enemy));
     }
     
-    class FixedRandom extends Random
+    static class FixedRandom extends Random
     {
         private static final long serialVersionUID = 1L;
         private double value;

@@ -2,12 +2,11 @@ package org.eccasts.sunburn;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
-import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.CandidateFactory;
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
-import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 
 public class SunburnMain {
     public static void main(String[] args) {
@@ -23,20 +22,14 @@ public class SunburnMain {
         
         CandidateFactory<SunburnGenome> candidateFactory = new SunburnFactory();
         
-        /*List<SunburnIndividual> population = 
+        List<SunburnGenome> population = 
             candidateFactory.generateInitialPopulation(populationSize, rng);
         
-        for(SunburnIndividual s : population)
-            System.out.println(s.toCrossoverForm());*/
+        for(SunburnGenome s : population)
+            System.out.println(s.toCrossoverForm());
         
-        EvolutionaryOperator<SunburnGenome> crossover = 
-            new SunburnCrossover(2, new Probability(crossoverProbability));
+        Logger logger = Logger.getLogger(SunburnShip.class.getName());
+        logger.setLevel(Level.SEVERE);
         
-        EvolutionaryOperator<SunburnGenome> mutation =
-            new SunburnMutation(SunburnShip.ALPHABET, new Probability( mutationProbability));
-        
-        
-        EvolutionaryOperator<SunburnGenome> pipeline =
-            new EvolutionPipeline<SunburnGenome>(pipeline)
     }
 }

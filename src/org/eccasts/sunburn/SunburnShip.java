@@ -22,7 +22,7 @@ public class SunburnShip {
         this.preferredRange = preferredRange;
         this.range = INITIAL_PREFERRED_RANGE;
     }
-
+    
     public String newRandomGenome() {
         StringBuffer sb = new StringBuffer(GENOME_LENGTH);
         
@@ -222,7 +222,7 @@ public class SunburnShip {
                 (isDestroyed() && enemy.isDestroyed());
     }
 
-    public synchronized int fightAgainst(SunburnShip enemy) {
+    public int fightAgainst(SunburnShip enemy) {
         int roundCount = 1;
         
         Logger logger = Logger.getLogger(SunburnShip.class.getName());
@@ -264,6 +264,6 @@ public class SunburnShip {
             logger.info("His current range: " + enemy.getRange());
             
             roundCount++;
-        }
+        }    
     }
 }
