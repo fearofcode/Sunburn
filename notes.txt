@@ -12,7 +12,7 @@ SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD_16.
 
 initial range of 20.
 
-preferred range is an integer, 1-30 inclusive.
+preferred range is an integer, 1-20 inclusive.
 
 ships start at initial range, firing all their guns at each other and then moving.
 

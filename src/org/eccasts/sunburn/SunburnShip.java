@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class SunburnShip {
     private static final int SHIELD_MULTIPLICATION_FACTOR = 3;
-    public static final int MAX_PREFERRED_RANGE = 30;
+    public static final int MAX_PREFERRED_RANGE = 20;
     public static final int MIN_PREFERRED_RANGE = 1;
     public static final int INITIAL_PREFERRED_RANGE = 20;
     private Random rng;
@@ -21,6 +21,11 @@ public class SunburnShip {
         this.rng = rng;
         this.preferredRange = preferredRange;
         this.range = INITIAL_PREFERRED_RANGE;
+    }
+    
+    public SunburnShip(Random rng, SunburnGenome genome) {
+        this(rng, genome.getPreferredRange());
+        setSlots(new String(genome.getSlots()));
     }
     
     public String newRandomGenome() {
@@ -43,7 +48,7 @@ public class SunburnShip {
             throw new IllegalArgumentException();
     }
 
-    public void setGenome(String genome) {
+    public void setSlots(String genome) {
         this.slots = genome;
         
         this.currentState = developGenome();
@@ -210,11 +215,11 @@ public class SunburnShip {
     }
 
     public boolean wonAgainst(SunburnShip enemy) {
-        return !isDestroyed() && drivesLeft() && enemy.isDestroyed();
+        return drivesLeft() && !isDestroyed() && !enemy.drivesLeft();
     }
 
     public boolean lostAgainst(SunburnShip enemy) {
-        return enemy.wonAgainst(this);
+        return enemy.drivesLeft() && !enemy.isDestroyed() && !drivesLeft();
     }
 
     public boolean drewAgainst(SunburnShip enemy) {
@@ -227,7 +232,7 @@ public class SunburnShip {
         
         Logger logger = Logger.getLogger(SunburnShip.class.getName());
         
-        while(true) {
+        while(!isDestroyed() && !enemy.isDestroyed() && drivesLeft() && enemy.drivesLeft()) {
             if(roundCount > 100) {
                 logger.info("100 rounds played, calling it a draw");
                 return 0;
@@ -246,16 +251,7 @@ public class SunburnShip {
             logger.info("Me: " + getCurrentState());
             logger.info("Him: " + enemy.getCurrentState());
             
-            if(wonAgainst(enemy)) {
-                logger.info("I win!");
-                return 1;
-            } else if(lostAgainst(enemy)) {
-                logger.info("I lose!");
-                return -1;
-            } else if(drewAgainst(enemy)) {
-                logger.info("Stalemate.");
-                return 0;
-            }
+            
             
             moveWithDrives();
             enemy.moveWithDrives();
@@ -264,6 +260,20 @@ public class SunburnShip {
             logger.info("His current range: " + enemy.getRange());
             
             roundCount++;
-        }    
+        }   
+        
+        if(wonAgainst(enemy)) {
+            logger.info("I win!");
+            return 1;
+        } else if(lostAgainst(enemy)) {
+            logger.info("I lose!");
+            return -1;
+        } else if(drewAgainst(enemy)) {
+            logger.info("Stalemate.");
+            return 0;
+        }
+        
+        return 0;
     }
+   
 }

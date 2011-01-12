@@ -16,7 +16,7 @@ public class SunburnGameTest {
 
     @Before public void init() {
         ship = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        ship.setGenome("GLMDSSMGLSDSMLGMLSDS");
+        ship.setSlots("GLMDSSMGLSDSMLGMLSDS");
     }
     
     @Test public void GenerateRandomShip() {
@@ -135,7 +135,7 @@ public class SunburnGameTest {
     @Test public void AnyDrivesLeft() {
         assertTrue(ship.drivesLeft());
         
-        ship.setGenome("GLMDSSMGLSMSMLGMLSMS");
+        ship.setSlots("GLMDSSMGLSMSMLGMLSMS");
         ship.takeHits(6*3+4);
         
         assertFalse(ship.drivesLeft());
@@ -150,38 +150,38 @@ public class SunburnGameTest {
     }
     
     @Test public void MoveShip() {
-        ship.setPreferredRange(25);
+        ship.setPreferredRange(15);
         assertEquals(20, ship.getRange());
         
         ship.move();
         
-        assertEquals(21, ship.getRange());
+        assertEquals(19, ship.getRange());
         
         ship.move();
         
-        assertEquals(22, ship.getRange());
+        assertEquals(18, ship.getRange());
         
-        ship.setPreferredRange(22);
-        
-        ship.move();
-        
-        assertEquals(22, ship.getRange());
-        
-        ship.setPreferredRange(21);
+        ship.setPreferredRange(12);
         
         ship.move();
         
-        assertEquals(21, ship.getRange());
+        assertEquals(17, ship.getRange());
+        
+        ship.setPreferredRange(20);
+        
+        ship.move();
+        
+        assertEquals(18, ship.getRange());
     }
     
     @Test public void UseDrivesToMove() {
         // SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD
-        ship.setPreferredRange(24);
+        ship.setPreferredRange(16);
         ship.moveWithDrives();
-        assertEquals(23, ship.getRange());
+        assertEquals(17, ship.getRange());
         
         ship.moveWithDrives();
-        assertEquals(24, ship.getRange());
+        assertEquals(16, ship.getRange());
         
     }
     
@@ -199,10 +199,10 @@ public class SunburnGameTest {
     @Test public void CanWin() {
         // SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD
         
-        ship.setGenome("GLMDSSMGLSMSMLGMLSMS");
+        ship.setSlots("GLMDSSMGLSMSMLGMLSMS");
         
         SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
+        enemy.setSlots("GLMDSSMGLSDSMLGMLSDS");
         enemy.takeHits("SSSSSSSSSSSSSSSSSS".length());
         assertEquals(false, ship.wonAgainst(enemy));
         enemy.takeHits("GLMDMGLDMLGMLD".length());
@@ -215,7 +215,7 @@ public class SunburnGameTest {
     
     @Test public void CanLose() {
         SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
+        enemy.setSlots("GLMDSSMGLSDSMLGMLSDS");
         ship.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
         
         assertEquals(true, ship.lostAgainst(enemy));
@@ -223,7 +223,7 @@ public class SunburnGameTest {
     
     @Test public void CanDraw() {
         SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
+        enemy.setSlots("GLMDSSMGLSDSMLGMLSDS");
         ship.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
         enemy.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
         
@@ -232,7 +232,7 @@ public class SunburnGameTest {
     
     @Test public void RunCombat() {
         SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        enemy.setGenome("SSSSSSSSSSSSSSSSSSSGD");
+        enemy.setSlots("SSSSSSSSSSSSSSSSSSSGD");
         
         Logger logger = Logger.getLogger(SunburnShip.class.getName());
         logger.setLevel(Level.SEVERE);
@@ -242,8 +242,8 @@ public class SunburnGameTest {
         // against two nearly all-shield setups, draw
         ship = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
-        enemy.setGenome("SSSSSSSSSSSSSSSSSSGD");
-        ship.setGenome("SSSSSSSSSSSSSSSSSSGD");
+        enemy.setSlots("SSSSSSSSSSSSSSSSSSGD");
+        ship.setSlots("SSSSSSSSSSSSSSSSSSGD");
         
         assertEquals(0, ship.fightAgainst(enemy));
     }
