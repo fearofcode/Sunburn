@@ -11,10 +11,11 @@ import org.junit.Test;
 
 
 public class SunburnGameTest {
+    public static final int INITIAL_PREFERRED_RANGE = 20;
     private SunburnShip ship;
 
     @Before public void init() {
-        ship = new SunburnShip(new Random());
+        ship = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         ship.setGenome("GLMDSSMGLSDSMLGMLSDS");
     }
     
@@ -200,7 +201,7 @@ public class SunburnGameTest {
         
         ship.setGenome("GLMDSSMGLSMSMLGMLSMS");
         
-        SunburnShip enemy = new SunburnShip(new Random());
+        SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
         enemy.takeHits("SSSSSSSSSSSSSSSSSS".length());
         assertEquals(false, ship.wonAgainst(enemy));
@@ -213,7 +214,7 @@ public class SunburnGameTest {
     }
     
     @Test public void CanLose() {
-        SunburnShip enemy = new SunburnShip(new Random());
+        SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
         ship.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
         
@@ -221,7 +222,7 @@ public class SunburnGameTest {
     }
     
     @Test public void CanDraw() {
-        SunburnShip enemy = new SunburnShip(new Random());
+        SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy.setGenome("GLMDSSMGLSDSMLGMLSDS");
         ship.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
         enemy.takeHits("SSSSSSSSSSSSSSSSSSGLMDMGLDMLGMLD".length());
@@ -230,7 +231,7 @@ public class SunburnGameTest {
     }
     
     @Test public void RunCombat() {
-        SunburnShip enemy = new SunburnShip(new Random());
+        SunburnShip enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy.setGenome("SSSSSSSSSSSSSSSSSSSGD");
         
         Logger logger = Logger.getLogger(SunburnShip.class.getName());
@@ -239,8 +240,8 @@ public class SunburnGameTest {
         assertEquals(1, ship.fightAgainst(enemy));
         
         // against two nearly all-shield setups, draw
-        ship = new SunburnShip(new Random());
-        enemy = new SunburnShip(new Random());
+        ship = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
+        enemy = new SunburnShip(new Random(), INITIAL_PREFERRED_RANGE);
         enemy.setGenome("SSSSSSSSSSSSSSSSSSGD");
         ship.setGenome("SSSSSSSSSSSSSSSSSSGD");
         

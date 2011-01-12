@@ -17,9 +17,9 @@ public class SunburnShip {
     private int totalHits;
     private int range;
     
-    public SunburnShip(Random rng) {
+    public SunburnShip(Random rng, int preferredRange) {
         this.rng = rng;
-        this.preferredRange = INITIAL_PREFERRED_RANGE;
+        this.preferredRange = preferredRange;
         this.range = INITIAL_PREFERRED_RANGE;
     }
 
