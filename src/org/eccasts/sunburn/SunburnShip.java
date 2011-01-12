@@ -11,8 +11,8 @@ public class SunburnShip {
     private Random rng;
     private int preferredRange;
     private String slots;
-    private static final char[] ALPHABET = new char[] { 'D', 'S', 'G', 'L', 'M' };
-    private static final int GENOME_LENGTH = 20;
+    public static final char[] ALPHABET = new char[] { 'D', 'S', 'G', 'L', 'M' };
+    public static final int GENOME_LENGTH = 20;
     private String currentState;
     private int totalHits;
     private int range;
